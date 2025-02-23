@@ -1,5 +1,5 @@
 {
-	"name": "python_template",
+	"name": "stats_explorer",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": ".."

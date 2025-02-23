@@ -1,5 +1,5 @@
 # Changelog
 
-## python_template
+## stats_explorer
 
 ## [0.0.0]
