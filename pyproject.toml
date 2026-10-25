@@ -34,12 +34,12 @@ stats_explorer = { path = ".", editable = true }
 
 [project.optional-dependencies]
 test = [
-  "pytest-cov>=4.1,<=6.0.0",
-  "pytest>=7.4,<=8.3.4",
-  "hypothesis>=6.104.2,<=6.126.0",
-  "ruff>=0.5.0,<=0.9.7",
-  "coverage>=7.5.4,<=7.6.12",
-  "pre-commit<=4.1.0",
+  "pytest-cov>=4.1,<=7.1.0",
+  "pytest>=7.4,<=9.1.1",
+  "hypothesis>=6.104.2,<=6.170.7",
+  "ruff>=0.5.0,<=0.17.2",
+  "coverage>=7.5.4,<=7.17.0",
+  "pre-commit<=4.7.0",
 ]
 
 [build-system]
