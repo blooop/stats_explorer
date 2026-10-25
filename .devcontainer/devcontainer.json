@@ -25,7 +25,7 @@
     // devpod's prebuild hash is computed from the Dockerfile and build context,
     // so it does not apply to an "image:" config like this one at all.
 
-    "initializeCommand": ".devcontainer/claude-code/init-host.sh",
+    "initializeCommand": "mkdir -p \"$HOME/.config/gh\" && .devcontainer/claude-code/init-host.sh",
 
     // There is deliberately no "runArgs": ["--network=host"].
     //
