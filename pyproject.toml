@@ -12,7 +12,7 @@ dependencies = []
 Source = "https://github.com/blooop/stats_explorer"
 Home = "https://github.com/blooop/stats_explorer"
 
-[tool.pixi.project]
+[tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64"]
 
