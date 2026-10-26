@@ -21,7 +21,7 @@ This has basic setup for
 [![GitHub pull-requests merged](https://badgen.net/github/merged-prs/blooop/stats_explorer)](https://github.com/blooop/stats_explorer/pulls?q=is%3Amerged)
 [![GitHub release](https://img.shields.io/github/release/blooop/stats_explorer.svg)](https://GitHub.com/blooop/stats_explorer/releases/)
 [![License](https://img.shields.io/pypi/l/bencher)](https://opensource.org/license/mit/)
-[![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11-blue)](https://www.python.org/downloads/release/python-310/)
+[![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/downloads/)
 
 
 To set up your project run the vscode task "pull updates from template repo" and then task "rename project template name"
