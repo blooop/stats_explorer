@@ -12,6 +12,16 @@ This has basic setup for
 * pypi upload
 * dependabot
 
+## One ruff version
+
+Ruff is pinned once, as `ruff==X.Y.Z` in `pyproject.toml`. Everything else runs that ruff from the pixi environment:
+
+* `pixi run lint` and `pixi run ci` run `ruff check .` and `ruff format --check .`
+* the prek hooks in `.pre-commit-config.yaml` are `repo: local` hooks that run `pixi run --locked ruff ...`, so they carry no version of their own
+* CI (`ci.yml` and `prek.yaml`) installs the pixi environment with `setup-pixi` and `locked: true`, so CI fails when `pixi.lock` does not match `pyproject.toml`. It does not run a stale ruff.
+
+To change the ruff version, edit the pin in `pyproject.toml` and run `pixi lock`. Dependabot changes only `pyproject.toml`, so run `pixi lock` on its PR before you merge it. Do not add a `rev:` for ruff to `.pre-commit-config.yaml` or a `version:` to a ruff GitHub action.
+
 ## Continuous Integration Status
 
 [![Ci](https://github.com/blooop/stats_explorer/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/blooop/stats_explorer/actions/workflows/ci.yml?query=branch%3Amain)
@@ -31,9 +41,34 @@ There are two methods of using this project.
 1. Use github to use this project as a template
 2. Clone the project and run, `scripts/update_from_template.sh` and then run the `scripts/rename_project.sh` to rename the project.
 
-If you want to use docker you may want to run the `scripts/setup_host.sh` script.  It will set up docker and nvidia-docker (assuming you are on ubuntu22.04).
+If you want to use docker you may want to run the `scripts/setup_host.sh` script.  It will set up docker and the NVIDIA Container Toolkit (tested on ubuntu 22.04/24.04/26.04).
 
 If you are using pixi, look at the available tasks in pyproject.toml  If you are new to pixi follow the instructions on the pixi [website](https://prefix.dev/)
+
+# Claude Code Online Support
+
+This repo includes built-in support for [Claude Code](https://docs.claude.com/claude-code) online environment! The `.claude/hooks/SessionStart` script automatically:
+
+- Installs pixi package manager
+- Sets up all project dependencies
+- Configures prek hooks
+- Prepares the development environment
+
+**Quick Start with Claude Code:**
+1. Open this repository in Claude Code online
+2. The environment sets up automatically via the SessionStart hook
+3. Claude can immediately run commands like `pixi run test`, `pixi run lint`, etc.
+
+**Manual activation (if needed):**
+```bash
+source .claude/activate.sh
+```
+
+See [.claude/README.md](.claude/README.md) for detailed information about the Claude Code configuration.
+
+# Devcontainer
+
+The devcontainer uses the prebuilt image from the template repository (`ghcr.io/blooop/python_template/devcontainer:latest`) for fast startup. This repo does not carry the template's `.devcontainer/Dockerfile` or the `dev-use-local` / `dev-use-prebuilt` tasks; to build the image locally, bring them over from [blooop/python_template](https://github.com/blooop/python_template) first.
 
 # Github setup
 
@@ -75,7 +110,7 @@ pixi run ci
 
 ## Legacy
 
-If you don't want to install rocker on your system but want to use vscode, you can run the `scripts/launch_vscode.sh` script to build and connect to a docker container. It will install rocker in a venv.  The docker container is dynamically generated using [rocker](https://github.com/osrf/rocker) and [deps rocker](https://github.com/blooop/deps_rocker).  [deps rocker](https://github.com/blooop/deps_rocker) looks at the stats_explorer.deps.yaml file to install any required apt, pip or shell scripts and launches a container that vscode attaches to. 
+If you don't want to install rocker on your system but want to use vscode, you can run the `scripts/launch_vscode.sh` script to build and connect to a docker container. It will install rocker in a venv.  The docker container is dynamically generated using [rocker](https://github.com/osrf/rocker) and the configuration in `rockerc.yaml`. 
 
 ## Troubleshooting
 

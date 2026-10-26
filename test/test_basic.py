@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from stats_explorer.basic_class import BasicClass
 
 
